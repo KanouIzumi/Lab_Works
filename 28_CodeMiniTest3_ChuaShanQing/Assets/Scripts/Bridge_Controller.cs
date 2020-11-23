@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bridge_Controller : MonoBehaviour
 {
-    public GameObject Bridge;
+    public GameObject Cone;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +14,7 @@ public class Bridge_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,7 +22,7 @@ public class Bridge_Controller : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             Debug.Log("Activited Bridge");
-            GameObject.FindGameObjectWithTag("Bridge").transform.rotation = Quaternion.Euler(0, 0, 0);
+            //GameObject.FindGameObjectWithTag("Bridge").transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 }

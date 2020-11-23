@@ -8,6 +8,7 @@ TagManager:
   - Bridge
   - Cone
   - MovingPlatform
+  - QuestionMark
   layers:
   - Default
   - TransparentFX

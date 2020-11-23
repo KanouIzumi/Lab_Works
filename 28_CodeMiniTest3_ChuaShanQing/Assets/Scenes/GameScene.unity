@@ -254,7 +254,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400016, guid: 2dc7b382d25903545b405802eb2198ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.495
+      value: -0.527
       objectReference: {fileID: 0}
     - target: {fileID: 400016, guid: 2dc7b382d25903545b405802eb2198ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1402,7 +1402,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142277749}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0.547, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1746407465}
@@ -1498,7 +1498,7 @@ Transform:
   m_GameObject: {fileID: 377389115}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 19.92}
-  m_LocalScale: {x: 1, y: 2, z: 2}
+  m_LocalScale: {x: 0.47533, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -1626,8 +1626,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.45523855, y: 1, z: 0.45944548}
+  m_Center: {x: -0.0023089796, y: 0, z: 0.02217412}
 --- !u!23 &739535590
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1702,7 +1702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae9a37ed5f126934c887077b5f480ebd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bridge: {fileID: 377389115}
+  Cone: {fileID: 1464214463}
 --- !u!1 &827959467
 GameObject:
   m_ObjectHideFlags: 0
@@ -2237,6 +2237,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1464214463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 10f4e51254da985418a112d2dfe124f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1585674878}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1585674878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2250,7 +2256,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 10f4e51254da985418a112d2dfe124f0, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Cone
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 10f4e51254da985418a112d2dfe124f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2258,7 +2264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 10f4e51254da985418a112d2dfe124f0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.45
+      value: -0.493
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 10f4e51254da985418a112d2dfe124f0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2312,6 +2318,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: d3451d4509d73de44aa114b52f182239, type: 3}
       propertyPath: m_Name
       value: SM_PolygonPrototype_Icon_Letter_Question_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d3451d4509d73de44aa114b52f182239, type: 3}
+      propertyPath: m_TagString
+      value: QuestionMark
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3451d4509d73de44aa114b52f182239, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2392,8 +2402,21 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.3576229, y: 0.6802191, z: 0.11389312}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.3576229, y: 0.6802191, z: 0.2265091}
+  m_Center: {x: 0, y: 0, z: 0.009868622}
+--- !u!114 &1692334649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692334644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fe6b6bbef1e18f41a969a07eb11419f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Questionmark: {fileID: 1692334644}
 --- !u!1 &1746407464 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100016, guid: 2dc7b382d25903545b405802eb2198ab,
