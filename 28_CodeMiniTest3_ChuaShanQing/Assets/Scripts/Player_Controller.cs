@@ -7,22 +7,25 @@ public class Player_Controller : MonoBehaviour
 {
     public Animator PlayerAnim;
     public Rigidbody PlayerRb;
-    public GameObject TimerText;
+    public GameObject timerText;
+
 
     float moveSpeed = 5.0f;
     float JumpForce = 5.0f;
+    float timerCount = 10.0f;
+    int timeCountInt;
     bool IsOnPlane;
     
     // Start is called before the first frame update
     void Start()
     {
-        TimerText.GetComponent<Text>().text = "Timer " + TimerText.ToString();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        TimerText.GetComponent<Text>().text = "Timer " + TimerText.ToString();
+        
         if (Input.GetKey(KeyCode.W))
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -70,6 +73,16 @@ public class Player_Controller : MonoBehaviour
             IsOnPlane = true;
             //This is to check if the character is on the floor
         }
+    }
+
+   private void timerCountDown()
+    {
+        if(timerCount > 0 )
+        {
+            timerCount -= Time.deltaTime;
+            timeCountInt = Mathf.RoundToInt(timerCount);
+        }
+        timerText.GetComponent<Text>().text = "Timer: " + timeCountInt;
     }
 
 }

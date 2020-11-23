@@ -7,6 +7,7 @@ TagManager:
   - GamePlane
   - Bridge
   - Cone
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
