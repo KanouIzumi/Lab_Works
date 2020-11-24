@@ -26,6 +26,7 @@ public class Player_Controller : MonoBehaviour
     bool MovingPlat = false;
 
     public GameObject MovingPlatform;
+    public GameObject Bridge;
 
     // Start is called before the first frame update
     void Start()
@@ -108,7 +109,8 @@ public class Player_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("Cone"))
         {
             Debug.Log("Activited Bridge");
-            GameObject.FindGameObjectWithTag("Bridge").transform.rotation = Quaternion.Euler(0, 0, 0);
+           // GameObject.FindGameObjectWithTag("Bridge").transform.rotation = Quaternion.Euler(0, 0, 0);
+            Bridge.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
 
