@@ -16,7 +16,17 @@ public class Player_Controller : MonoBehaviour
     float timerCount = 10.0f;
     int timeCountInt;
     bool IsOnPlane;
-    
+
+    //This is for the moving platform
+    float platFormSpeed = 5.0f; //platform moving speed
+    float zstart = 70.01f; // Platform limit on top
+    float zLimit = 54.84f; // Platform limit at the bottom
+    bool PlusLimit = true; // to check the moving platform condition
+
+    bool MovingPlat = false;
+
+    public GameObject MovingPlatform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +67,22 @@ public class Player_Controller : MonoBehaviour
             IsOnPlane = false;
         }
 
+        if (MovingPlat == true)
+        {
+            if (MovingPlatform.transform.position.z < zstart && PlusLimit == true)
+            {
+                MovingPlatform.transform.Translate(Vector3.forward * Time.deltaTime * platFormSpeed);
+
+            }
+            else if (MovingPlatform.transform.position.z > zLimit && PlusLimit == false)
+            {
+                MovingPlatform.transform.Translate(Vector3.forward * Time.deltaTime * -platFormSpeed);
+            }
+            else
+            {
+                PlusLimit = !PlusLimit; //Changing PlusLimit into false
+            }
+        }
     }
 
     void StartRun()
@@ -74,6 +100,16 @@ public class Player_Controller : MonoBehaviour
             IsOnPlane = true;
             //This is to check if the character is on the floor
         }
+        if (collision.gameObject.CompareTag("MovingPlatform"))
+        {
+            IsOnPlane = true;
+        }
+
+        if (collision.gameObject.CompareTag("Cone"))
+        {
+            Debug.Log("Activited Bridge");
+            GameObject.FindGameObjectWithTag("Bridge").transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
    private void timerCountDown()
@@ -86,4 +122,13 @@ public class Player_Controller : MonoBehaviour
         timerText.GetComponent<Text>().text = "Timer: " + timeCountInt;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Box"))
+        {
+            Debug.Log("Actived Moving Platform");
+            MovingPlat = true;
+            //Debug.Log("Hello");
+        }
+    }
 }

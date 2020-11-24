@@ -9,6 +9,7 @@ TagManager:
   - Cone
   - MovingPlatform
   - QuestionMark
+  - Box
   layers:
   - Default
   - TransparentFX
