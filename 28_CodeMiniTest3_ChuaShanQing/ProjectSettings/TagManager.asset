@@ -10,6 +10,7 @@ TagManager:
   - MovingPlatform
   - QuestionMark
   - Box
+  - PowerUp
   layers:
   - Default
   - TransparentFX

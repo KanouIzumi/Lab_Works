@@ -368,7 +368,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 764371366}
-        m_MethodName: RestartGame
+        m_MethodName: GotoMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

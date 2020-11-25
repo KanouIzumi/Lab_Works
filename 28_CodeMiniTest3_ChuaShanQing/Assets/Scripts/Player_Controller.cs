@@ -8,13 +8,11 @@ public class Player_Controller : MonoBehaviour
 {
     public Animator PlayerAnim;
     public Rigidbody PlayerRb;
-    public GameObject timerText;
+    public GameObject timerTextGO;
 
 
     float moveSpeed = 5.0f;
     float JumpForce = 5.0f;
-    float timerCount = 10.0f;
-    int timeCountInt;
     bool IsOnPlane;
 
     //This is for the moving platform
@@ -27,48 +25,94 @@ public class Player_Controller : MonoBehaviour
 
     public GameObject MovingPlatform;
     public GameObject Bridge;
+    public GameObject PowerUp;
+
+
+    //This is for the power up
+    public int PowerUpCount;
+    private int TotalPowerUp;
+
+    //This is for the timer
+    int timeCountInt;
+    float timerCount = 10;
+    bool isStartCount;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        TotalPowerUp = GameObject.FindGameObjectsWithTag("PowerUp").Length;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+        //This code is for running
         if (Input.GetKey(KeyCode.W))
         {
             transform.rotation = Quaternion.Euler(0, 0, 0);
             StartRun();
         }
-        else if(Input.GetKeyUp(KeyCode.W))
+        else if (Input.GetKeyUp(KeyCode.W)) //Go up
         {
             PlayerAnim.SetBool("IsRun", false);
             PlayerAnim.SetFloat("StartRun", 0);
         }
 
-        else if (Input.GetKey(KeyCode.S))
+        else if (Input.GetKey(KeyCode.S)) // Go back
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
             StartRun();
         }
 
-        else if (Input.GetKeyUp(KeyCode.S))
+        else if (Input.GetKeyUp(KeyCode.S)) //Go Back
         {
             PlayerAnim.SetBool("IsRun", false);
             PlayerAnim.SetFloat("StartRun", 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && IsOnPlane)
+        else if (Input.GetKey(KeyCode.A)) // Go Left
+        {
+            transform.rotation = Quaternion.Euler(0, -90, 0);
+            StartRun();
+        }
+
+
+        else if (Input.GetKeyUp(KeyCode.A)) //Go Left
+        {
+            PlayerAnim.SetBool("IsRun", false);
+            PlayerAnim.SetFloat("StartRun", 0);
+        }
+
+        else if (Input.GetKey(KeyCode.D)) // Go Right
+        {
+            transform.rotation = Quaternion.Euler(0, 90, 0);
+            StartRun();
+        }
+
+
+        else if (Input.GetKeyUp(KeyCode.D)) //Go Right
+        {
+            PlayerAnim.SetBool("IsRun", false);
+            PlayerAnim.SetFloat("StartRun", 0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && IsOnPlane) // This code is for Jumping
         {
             PlayerRb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             PlayerAnim.SetTrigger("TrigJump");
             IsOnPlane = false;
         }
 
-        if (MovingPlat == true)
+        if (transform.position.y < -5)
+        {
+            print("You Lose");
+            SceneManager.LoadScene("GameOverScene");
+        }
+
+
+
+        if (MovingPlat == true) // The moving platform will start to move
         {
             if (MovingPlatform.transform.position.z < zstart && PlusLimit == true)
             {
@@ -83,6 +127,14 @@ public class Player_Controller : MonoBehaviour
             {
                 PlusLimit = !PlusLimit; //Changing PlusLimit into false
             }
+
+
+
+        }
+
+        if (isStartCount == true)
+        {
+            timerCountDown();
         }
     }
 
@@ -93,35 +145,42 @@ public class Player_Controller : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * moveSpeed);
     }
 
-
     private void OnCollisionEnter(Collision collision)
     {
+        // collision.gameObject
+        // this.gameObject 
         if (collision.gameObject.CompareTag("GamePlane"))
         {
             IsOnPlane = true;
             //This is to check if the character is on the floor
+
         }
         if (collision.gameObject.CompareTag("MovingPlatform"))
         {
             IsOnPlane = true;
         }
 
-        if (collision.gameObject.CompareTag("Cone"))
+        if (collision.gameObject.CompareTag("PowerUp"))
         {
-            Debug.Log("Activited Bridge");
-           // GameObject.FindGameObjectWithTag("Bridge").transform.rotation = Quaternion.Euler(0, 0, 0);
-            Bridge.transform.rotation = Quaternion.Euler(0, 0, 0);
+            PowerUpCount++;
+            print("Got Power Up");
+            Destroy(collision.gameObject);
+            // gameObject -> Player gameObject
+            // collision.gameObject -> the other gameobject
         }
-    }
 
-   private void timerCountDown()
-    {
-        if(timerCount > 0 )
+        if (PowerUpCount == TotalPowerUp)
         {
-            timerCount -= Time.deltaTime;
-            timeCountInt = Mathf.RoundToInt(timerCount);
+            if (collision.gameObject.CompareTag("Cone"))
+            {
+                Debug.Log("Activited Bridge");
+                // GameObject.FindGameObjectWithTag("Bridge").transform.rotation = Quaternion.Euler(0, 0, 0);
+                Bridge.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+                isStartCount = true;
+            }
         }
-        timerText.GetComponent<Text>().text = "Timer: " + timeCountInt;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -133,4 +192,23 @@ public class Player_Controller : MonoBehaviour
             //Debug.Log("Hello");
         }
     }
+
+    private void timerCountDown()
+    {
+        if (timerCount > 0)
+        {
+            timerCount -= Time.deltaTime;
+            timeCountInt = Mathf.RoundToInt(timerCount);
+            timerTextGO.GetComponent<Text>().text = "Timer: " + timeCountInt;
+        }
+
+        else if (timerCount < 1)
+        {
+            timerCount = 10.0f;
+            Bridge.transform.rotation = Quaternion.Euler(0, 90, 0);
+            isStartCount = false;
+        }
+
+    }
+
 }
