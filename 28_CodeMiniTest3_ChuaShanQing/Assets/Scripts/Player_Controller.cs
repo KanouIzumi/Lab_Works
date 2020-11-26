@@ -9,6 +9,8 @@ public class Player_Controller : MonoBehaviour
     public Animator PlayerAnim;
     public Rigidbody PlayerRb;
     public GameObject timerTextGO;
+    public GameObject Child;
+    public Material[] playermtrls;
 
 
     float moveSpeed = 5.0f;
@@ -41,6 +43,7 @@ public class Player_Controller : MonoBehaviour
     void Start()
     {
         TotalPowerUp = GameObject.FindGameObjectsWithTag("PowerUp").Length;
+        Child.GetComponent<SkinnedMeshRenderer>().material.color = playermtrls[0].color;
     }
 
     // Update is called once per frame
@@ -101,6 +104,7 @@ public class Player_Controller : MonoBehaviour
         {
             PlayerRb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
             PlayerAnim.SetTrigger("TrigJump");
+            Child.GetComponent<SkinnedMeshRenderer>().material.color = playermtrls[1].color;
             IsOnPlane = false;
         }
 
@@ -152,12 +156,14 @@ public class Player_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("GamePlane"))
         {
             IsOnPlane = true;
+            Child.GetComponent<SkinnedMeshRenderer>().material.color = playermtrls[0].color;
             //This is to check if the character is on the floor
 
         }
         if (collision.gameObject.CompareTag("MovingPlatform"))
         {
             IsOnPlane = true;
+            Child.GetComponent<SkinnedMeshRenderer>().material.color = playermtrls[0].color;
         }
 
         if (collision.gameObject.CompareTag("PowerUp"))
@@ -179,6 +185,12 @@ public class Player_Controller : MonoBehaviour
 
                 isStartCount = true;
             }
+        }
+
+        if (collision.gameObject.CompareTag("Bridge"))
+        {
+            IsOnPlane = true;
+            Child.GetComponent<SkinnedMeshRenderer>().material.color = playermtrls[0].color;
         }
 
     }

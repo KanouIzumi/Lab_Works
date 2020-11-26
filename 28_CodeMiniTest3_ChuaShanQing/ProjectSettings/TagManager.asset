@@ -11,6 +11,7 @@ TagManager:
   - QuestionMark
   - Box
   - PowerUp
+  - Child
   layers:
   - Default
   - TransparentFX
