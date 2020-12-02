@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class GameManger_Controller : MonoBehaviour
 {
     public static GameManger_Controller instance;
-
-    public GameObject addEnergyPrefab;
-    public GameObject minusEnergyPrefab;
+    public GameObject[] EnergyCubes;
     public GameObject TimeLimit;
+    int iRandomEnergyCubes;
+    float maxLimit = 10;
 
-    public int numberOfSpawn;
     public int numberOfSpawns;
     public float levelTime;
 
@@ -24,20 +23,16 @@ public class GameManger_Controller : MonoBehaviour
         }
 
         //This code is for the random spawn
-        for (int i =0; i < numberOfSpawn; i++)
+        int ISize = 10;
+
+        while(ISize > 0)
         {
-            Vector3 randomPos = new Vector3(Random.Range(-15, 15), 0, Random.Range(-15,15));
+            iRandomEnergyCubes = Random.Range(0, EnergyCubes.Length);
 
-            if (Random.Range(0,2) < 1)
-            {
-                Instantiate(addEnergyPrefab, randomPos, Quaternion.identity);
-            }
+            Vector3 newPos = new Vector3(Random.Range(-maxLimit, maxLimit), transform.position.y, Random.Range(-maxLimit, maxLimit));
 
-            else
-            {
-                Instantiate(minusEnergyPrefab, randomPos, Quaternion.identity);
-            }
-            
+            Instantiate(EnergyCubes[iRandomEnergyCubes], newPos, Quaternion.identity);
+            ISize--;
         }
 
 
@@ -59,6 +54,13 @@ public class GameManger_Controller : MonoBehaviour
             TimeLimit.GetComponent<Text>().text = "LevelTime: 00:00:000";
             print("Times Up!");
         }
+
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Destroy(GameObject.FindGameObjectWithTag("MinusEnergy"));
+        }
+
     }
 
     public string FormatTime(float time)
@@ -74,18 +76,14 @@ public class GameManger_Controller : MonoBehaviour
     {
         for (int i = 0; i < numberOfSpawns; i++)
         {
-            Vector3 randomPos = new Vector3(Random.Range(-15, 15), 0, Random.Range(-15, 15));
 
-            if (Random.Range(0, 2) < 1)
-            {
-                Instantiate(addEnergyPrefab, randomPos, Quaternion.identity);
-            }
+            iRandomEnergyCubes = Random.Range(0, EnergyCubes.Length);
 
-            else
-            {
-                Instantiate(minusEnergyPrefab, randomPos, Quaternion.identity);
-            }
+            Vector3 newPos = new Vector3(Random.Range(-maxLimit, maxLimit), transform.position.y, Random.Range(-maxLimit, maxLimit));
+
+            Instantiate(EnergyCubes[iRandomEnergyCubes], newPos, Quaternion.identity);
 
         }
     }
+
 }

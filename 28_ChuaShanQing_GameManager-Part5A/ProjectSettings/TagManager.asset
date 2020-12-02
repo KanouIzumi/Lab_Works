@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AddEnergy
   - MinusEnergy
+  - PowerUp
   layers:
   - Default
   - TransparentFX

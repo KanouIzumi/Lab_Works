@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class Player_Controller : MonoBehaviour
 {
     public Animator PlayerAnim;
+    public GameObject PowerUp;
     public GameObject EnergyCountText;
     public float EnergyCount;
     bool gameStart = true;
@@ -114,6 +115,12 @@ public class Player_Controller : MonoBehaviour
             EnergyCount -= 25;
             Destroy(collision.collider.gameObject);
             EnergyCountText.GetComponent<Text>().text = "EnergyCount: " + EnergyCount;
+        }
+
+
+        if (collision.gameObject.CompareTag("PowerUp"))
+        {
+            Destroy(GameObject.FindGameObjectWithTag("MinusEnergy"));
         }
     }
 }
