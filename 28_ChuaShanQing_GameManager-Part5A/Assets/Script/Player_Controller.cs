@@ -9,6 +9,8 @@ public class Player_Controller : MonoBehaviour
     public Animator PlayerAnim;
     public GameObject PowerUp;
     public GameObject EnergyCountText;
+    public Text totalAddEnergytxt;
+    public Text totalCollectedAddEnergy;
     public float EnergyCount;
     bool gameStart = true;
 
@@ -17,7 +19,8 @@ public class Player_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //print("Minus Cube Count is: " + iMinusSize);
+       // totalAddEnergytxt.text = "Total Add Energy count: " + iAddSize.ToString();
     }
 
     // Update is called once per frame
@@ -120,7 +123,7 @@ public class Player_Controller : MonoBehaviour
 
         if (collision.gameObject.CompareTag("PowerUp"))
         {
-            Destroy(GameObject.FindGameObjectWithTag("MinusEnergy"));
+            GameManger_Controller.instance.DestroyMinusCube();
         }
     }
 }
